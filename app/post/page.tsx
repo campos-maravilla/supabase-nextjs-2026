@@ -9,7 +9,10 @@ export default function CreatePage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [caption, setCaption] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +44,7 @@ export default function CreatePage() {
     const filePath = `posts/${fileName}`;
 
     // 2️⃣ Subir al bucket "images"
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from("images")
       .upload(filePath, file, {
@@ -195,7 +199,7 @@ export default function CreatePage() {
                 </span>
               </label>
             )}
-            
+
             <input
               ref={fileInputRef}
               id="image-upload"
